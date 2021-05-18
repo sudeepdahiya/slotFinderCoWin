@@ -7,6 +7,7 @@
  - login into account
  - Search for your desire district and state
  - copy paste the index.js file code in browser console(Chrome)
+ - obj.start()
  - wait until modal popop open
 
  # functions
