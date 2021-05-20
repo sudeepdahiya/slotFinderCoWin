@@ -7,8 +7,17 @@ setTimeout(() => {
     let interval = null;
     let age = 'Age 18+'
     let count =  40;
+    let type = [['COVISHIELD', 'COVAXIN'], ['COVISHIELD'], ['COVAXIN']];
+    let vaccine = 0;
     this.start = () => {
       interval = setInterval(this.getSlots, 3000);
+    }
+    this.toggleVaccine = () => {
+      vaccine++;
+      if (vaccine === type.length) {
+        vaccine = 0;
+      }
+      return type[vaccine];
     }
     this.toggleAge = () => {
       age = age === 'Age 18+' ? 'Age 45+' : 'Age 18+'
@@ -29,10 +38,11 @@ setTimeout(() => {
           let tagA = $("a", obj2[i]);
           let ageA = $(".age-limit", obj2[i]);
           if (tagA.length && ageA.length) {
+            let vaccineType = $("div.vaccine-cnt h5",  obj2[i])[0].innerHTML;
             let available = parseInt(tagA[0].innerHTML);
             let isValid = ageA[0].innerHTML === age;
-            if (available > count && isValid) {
-              console.log('tagA', tagA, i)
+            if (available > count && isValid && type[vaccine].indexOf(vaccineType) !== -1) {
+              console.log('tagA ', tagA, i, vaccineType)
               tagA[0].click();
               clearInterval(interval)
               break;
